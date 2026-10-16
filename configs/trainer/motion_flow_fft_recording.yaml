@@ -1,0 +1,7 @@
+defaults:
+    - motion_flow_fft_speaker
+    - _self_
+
+speaker_independent:
+    protocol: recording_disjoint
+    output_dir: results/recording_independent

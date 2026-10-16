@@ -1,0 +1,35 @@
+model_name: motion_transfer
+_target_: trainer.motion_transfer.Trainer
+
+folder: save/${trainer.model_name}/${data.data_name}/${task}
+ckpt_dir: ${get_last_checkpoint:${trainer.folder}}
+resumed_training: ${resume}  # true | false
+current_runid: ${run_id}
+resume_runid: ${resume_id}
+
+#epochs: 200
+#val_interval: 10 # validate every N epochs
+
+epochs: 200
+val_interval: 20  # validate every N epochs
+gpu_ids: 0
+lr: 0.00001
+j: 12  # num_workers
+batch_size: 4
+max_seq_len: 750
+window_size: 8
+post_config_name: configs/model/emotion_autoencoder.yaml
+post_clip_length: 1000  # ground-truths alignment
+data_clamp: True
+data_transform: zero_center  # standard | zero_center
+
+renderer:  # face animation based on predicted 3DMM coefficients
+    name: PIRenderer
+    _target_: utils.render.Render
+    do_render: False # True / False
+    transform_reverse: ${trainer.data_transform}
+
+defaults:
+    - /model/motion_transfer@model
+    - /model/optim/adamw@optim
+    - /model/losses/motion_transfer@criterion  # loss func

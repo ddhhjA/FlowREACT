@@ -1,0 +1,23 @@
+defaults:
+    - motion_flow_fft
+    - _self_
+
+data_name: react_2025_speaker_independent
+split_dir: ???
+evaluation_group: unseen
+workers: 4
+
+train_dataset:
+    pair_manifest: ${data.split_dir}/train.csv
+    num_workers: ${data.workers}
+
+validation_dataset:
+    pair_manifest: ${data.split_dir}/val.csv
+    num_workers: ${data.workers}
+
+test_dataset:
+    pair_manifest: ${data.split_dir}/${data.evaluation_group}.csv
+    num_workers: ${data.workers}
+    gt_seed: 1234
+    load_video_s: false
+    load_video_l: false

@@ -1,0 +1,70 @@
+model_name: motion_flow_fft
+_target_: trainer.motion_flow_fft.Trainer
+
+folder: save/${trainer.model_name}/${data.data_name}/${task}
+ckpt_dir: ${get_last_checkpoint:${trainer.folder}}
+resumed_training: ${resume}  # true | false
+current_runid: ${run_id}
+resume_runid: ${resume_id}
+
+#epochs: 200
+#val_interval: 10 # validate every N epochs
+
+epochs: 100
+val_interval: 5 # validate every N epochs
+gpu_ids: 0
+lr: 0.00001
+j: 12  # num_workers
+batch_size: 4
+max_seq_len: 750
+window_size: 8
+div_p: 1
+post_config_name: configs/model/emotion_autoencoder.yaml
+post_clip_length: 1000  # ground-truths alignment
+data_clamp: True
+data_transform: zero_center  # standard | zero_center
+inference_history: previous_window  # previous_window | legacy_zero (inference comparison only)
+history_weight: 1.0  # Shared train/val/test history scale; 0 matches zero-history inference.
+history_training:
+    sample_probability: 0.0  # Opt-in: replace reconstructed history with detached sampled history.
+    warmup_epochs: 0
+    ramp_epochs: 10
+init_checkpoint: null  # Weights-only initialization in a NEW run; mutually exclusive with resume.
+
+robustness:
+    enabled: false
+    # clean | audio_zero | visual_zero | expression_zero | pose_zero | all_zero | hard_zero
+    # speaker_condition_zero zeros all observable speaker conditions while preserving generation
+    # speaker_feature_zero | history_zero | flow_noise_zero | flow_latent_zero | periodic_zero
+    # audio_noise | audio_mismatch
+    mode: clean
+    audio_snr_db: 20.0
+    expression_dims: 52
+    metric_threads: 4
+    max_samples: 0  # 0 means the full evaluation split
+    seed: ${seed}
+    output_dir: results/robustness
+    save_debug_visuals: false
+    debug_max_frames: 128
+    debug_window_index: 1
+
+# Profile the real training path (forward + diversity forward + loss + backward + optimizer).
+train_profile:
+    repeats: 3
+    warmup_steps: 3
+    measure_steps: 0  # 0 measures one complete training epoch per repeat
+    flops_batch_size: 1
+    cur_epoch: 1
+    seed: ${seed}
+    output_dir: results/train_profile
+
+renderer:  # face animation based on predicted 3DMM coefficients
+    name: PIRenderer
+    _target_: utils.render.Render
+    do_render: False # Enable only after installing optional rendering assets.
+    transform_reverse: ${trainer.data_transform}
+
+defaults:
+    - /model/motion_flow_fft@model
+    - /model/optim/adamw@optim
+    - /model/losses/motion_flow_fft@criterion  # loss func

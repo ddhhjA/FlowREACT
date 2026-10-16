@@ -1,0 +1,123 @@
+#_target_: framework.utils.loss_fft2.FMLossFFT
+#_target_: framework.utils.loss_fft.FMLossFFT
+#_target_: framework.utils.losses.FMLossFFT
+#_target_: framework.utils.losses.FMLoss
+#_target_: framework.utils.losses.FMAddEyeLoss
+#_target_: framework.utils.losses.EyeFMLoss
+#_target_: framework.utils.loss_cyc.FMCycLoss
+#_target_: framework.utils.loss_cyc_2.FMCycLoss
+#_target_: framework.utils.loss_cyc_3.FMCycLoss
+#_target_: framework.utils.loss_cyc_4.FMCycLoss
+#_target_: framework.utils.loss_cyc_5.FMCycLoss
+#_target_: framework.utils.loss_cyc_6.FMCycLoss
+#_target_: framework.utils.loss_cyc_7.FMCycLoss
+#_target_: framework.utils.loss_cyc_8.FMCycLoss
+#_target_: framework.utils.loss_cyc_9.FMCycLoss
+#_target_: framework.utils.loss_cyc_10.FMCycLoss
+#_target_: framework.utils.loss_cyc_11.FMCycLoss
+#_target_: framework.utils.loss_cyc_12.FMCycLoss
+#_target_: framework.utils.loss_cyc_13.FMCycLoss
+#_target_: framework.utils.loss_cyc_14.FMCycLoss
+#_target_: framework.utils.loss_cyc_15.FMCycLoss
+#_target_: framework.utils.loss_cyc_16.FMCycLoss
+_target_: framework.utils.loss_cyc_17.FMCycLoss
+#_target_: framework.utils.loss_cyc_18.FMCycLoss
+#_target_: framework.utils.loss_cyc_19.FMCycLoss
+#_target_: framework.utils.loss_cyc_stage.FMCycStageLoss
+
+w_fm: 1.0  # w_fm
+w_emo: 2.0 # emotion
+w_exp: 2.0  # facial expression
+w_rot: 4.0  # rotation
+w_tran: 4.0  # translation
+w_smo: 10.0  # smoothness
+
+#w_smo: 5.0  # smoothness
+#w_smo: 0.0  # smoothness
+
+
+#w_fm: 1.0  # w_fm
+#w_emo: 2.0 # emotion
+#w_exp: 3.0  # facial expression
+#w_rot: 4.0  # rotation
+#w_tran: 4.0  # translation
+#w_smo: 10.0  # smoothness
+
+#w_fm: 1.0  # w_fm
+#w_emo: 2.0 # emotion
+#w_exp: 3.0  # facial expression
+#w_rot: 5.0  # rotation
+#w_tran: 5.0  # translation
+#w_smo: 10.0  # smoothness
+
+
+#w_fm: 1.0  # w_fm
+#w_emo: 2.0 # emotion
+#w_exp: 2.0  # facial expression
+#w_rot: 5.0  # rotation
+#w_tran: 5.0  # translation
+#w_smo: 10.0  # smoothness
+
+
+
+
+# FMCyc11Loss V33 ， V34不需要
+#w_emo: 1.0 # emotion
+
+# FMCyc12Loss
+w_emo_smo: 0.01  # emotion smoothness
+
+
+# FMCyc5Loss
+#w_smo: 5.0  # smoothness
+
+#w_fm: 1.0  # w_fm
+#w_emo: 0.2 # emotion
+#w_exp: 2.0  # facial expression
+#w_rot: 4.0  # rotation
+#w_tran: 4.0  # translation
+#w_smo: 10.0  # smoothness
+
+# EyeFMLoss
+w_phase: 0.2  # phase loss
+
+# FMCycLoss
+w_cyc: 1.0  # cycle consistency loss
+#w_cyc: 0.0  # cycle consistency loss
+#w_cyc: 0.5  # cycle consistency loss
+
+# EmotionLoss
+w_au: 0.1  # action unit
+w_va: 0.1  # valence and arousal
+w_em: 0.1  # emotion
+
+# FMCycLoss V6
+w_blink: 1.0 # blink consistency loss
+
+# FMCyc7Loss
+w_expr_smooth: 1.0  # expression smoothness
+
+# FMCyc8Loss
+w_align: 0.3  # alignment loss
+
+# FMCycLoss: periodic_consistency_loss_v2, periodic_variance_loss, cyc_contrastive_loss
+w_cyc_cons: 1.0
+w_cyc_var: 0.05
+w_cyc_con: 1.0
+
+# FMAddEyeLoss
+w_add_eye: 2.0 # additional weight for eye region
+
+#w_fm: 1.0  # w_fm
+#w_emo: 1.0
+#w_exp: 1.0  # facial expression
+#w_rot: 2.0  # rotation
+#w_tran: 2.0  # translation
+#w_smo: 2.0  # smoothness
+
+
+### Hierarchical FMLossFFT
+w_vel: 0.2       # velocity loss
+w_fft: 0.1       # high-frequency spectrum loss
+w_res: 0.5       # residual-based weighting
+w_anti_smooth: 0.1  # anti-smoothness loss

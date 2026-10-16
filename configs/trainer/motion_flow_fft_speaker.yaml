@@ -1,0 +1,16 @@
+defaults:
+    - motion_flow_fft
+    - _self_
+
+validation_window_size: ${trainer.window_size}
+
+renderer:
+    do_render: false
+
+speaker_independent:
+    enabled: true
+    protocol: speaker_independent
+    output_dir: results/speaker_independent
+    checkpoint: null
+    evaluation_group: ${data.evaluation_group}
+    training_seed: ${seed}

@@ -1,0 +1,6 @@
+defaults:
+    - motion_flow_fft_speaker
+    - _self_
+
+data_name: react_2025_recording_disjoint
+evaluation_group: heldout

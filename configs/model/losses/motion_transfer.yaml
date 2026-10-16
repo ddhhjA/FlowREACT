@@ -1,0 +1,5 @@
+_target_: framework.utils.loss_transfer.Emotion3DMMLoss
+
+w_rec: 1.0
+w_latent: 0.5
+w_smo: 0.1

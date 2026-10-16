@@ -1,0 +1,15 @@
+model_name: FlowReact
+_target_: framework.motion_flow.FlowMatchingVAEV41.FlowReact
+
+img_size: 224
+audio_dim: 768
+output_3dmm_dim: 58
+output_emotion_dim: 25
+feature_dim: 512 # 512 / 128
+z_dim: 512  # 256/ 512
+emotion_transfer_ckpt: ???  # Set to a trained Emotion3DMMTransformer checkpoint.
+noise_scale: 0.05
+seq_len: ${data.train_dataset.clip_length}
+task: ${task}
+window_size: ${trainer.window_size}
+device: cuda

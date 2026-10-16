@@ -1,0 +1,21 @@
+# Install a CUDA-compatible PyTorch, torchvision, and torchaudio build first.
+decord
+einops
+fvcore
+hydra-core
+iopath
+librosa
+matplotlib
+numpy
+omegaconf
+opencv-python-headless
+Pillow
+scikit-learn
+scipy
+soundfile
+tensorboard
+torchdiffeq
+torchinfo
+tqdm
+transformers
+tslearn

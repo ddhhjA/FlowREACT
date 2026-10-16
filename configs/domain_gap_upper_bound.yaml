@@ -1,0 +1,47 @@
+hydra:
+  run:
+    dir: outputs/domain_gap_upper_bound/${now:%Y-%m-%d_%H-%M-%S}
+  job:
+    chdir: true
+
+seed: 1234
+device: cuda
+data_dir: ???
+checkpoint: ???  # Set via the checkpoint= command-line override.
+
+clip_length: 750
+batch_size: 1
+num_workers: 8
+num_preds: 10
+metric_threads: 4
+window_size: 8
+data_clamp: true
+max_samples: 0
+output_dir: results/domain_gap_upper_bound
+
+dataset:
+  _target_: dataset.react_2025.ReactionDataset
+  root_dir: ${data_dir}
+  split: val
+  clip_length: ${clip_length}
+  target_size: 224
+  crop_size: 224
+  fps: 30
+  audio_feature_type: wav2vec
+  load_video_s: false
+  load_video_l: false
+  load_audio: false
+  load_emotion_s: true
+  load_emotion_l: true
+  load_3dmm_s: true
+  load_3dmm_l: true
+  normalize_3dmm: zero_center
+
+converter:
+  _target_: framework.motion_flow.Emotion3DMMTrans.Emotion3DMMTransformer
+  emotion_dim: 25
+  param_dim: 58
+  latent_dim: 256
+  n_layers: 4
+  n_heads: 4
+  window_size: ${window_size}
