@@ -1,18 +1,3 @@
-# FlowREACT
-
-FlowREACT generates multiple listener facial reactions from speaker audio and 3DMM motion using windowed flow matching. This source release supports the REACT2025 dataset only and builds on the [REACT2025 baseline](https://github.com/reactmultimodalchallenge/baseline_react2025).
-
-[中文说明](README_zh.md) | [Data preparation](docs/DATA.md) | [Evaluation](docs/EVALUATION.md) | [Release scope](docs/RELEASE_SCOPE.md)
-
-## Contents
-
-- `main.py`, `configs/`, `trainer/motion_flow_fft.py`: Hydra entry point, experiment configuration, and trainer.
-- `framework/motion_flow/FlowMatchingVAEV41.py`: FlowREACT model.
-- `framework/motion_flow/Emotion3DMMTrans.py`: 3DMM-to-emotion converter.
-- `dataset/react_2025.py`, `dataset/data_preprocess/`: REACT2025 loader and audio preprocessing.
-- `framework/metrics/`: listener-reaction evaluation metrics.
-- `trainer/motion_flow_fft.py`: training, testing, and model profiling.
-
 ## Environment
 
 Use Python 3.10 on Linux with a CUDA-capable GPU for training. Install a matching PyTorch, torchvision, and torchaudio build for your CUDA environment, then run:
@@ -65,8 +50,4 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 
 The test path also requires the baseline post-processor checkpoint at `pretrained_models/post_processor/checkpoint.pth`. For evaluation and profiling details, see [Evaluation](docs/EVALUATION.md).
 
-## Notes
 
-Windowed model-forward FPS excludes raw audio feature extraction, disk loading, rendering, and metric computation. Match the window size and preprocessing protocol to the checkpoint used for evaluation. The original dataset, trained weights, and third-party rendering assets are not distributed with this source package.
-
-The original baseline's license notice is retained in [LICENSE](LICENSE). See [Release scope](docs/RELEASE_SCOPE.md) for included code, external assets, and the GAN experiment caveat.
